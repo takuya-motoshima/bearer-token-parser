@@ -1,6 +1,6 @@
 {
   "name": "bearer-token-parser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This is a package that contains the Bearer token parsing and validation modules.",
   "_moduleAliases": {
     "~": "."
