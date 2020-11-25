@@ -28,7 +28,16 @@ This is middleware for validating Bearer tokens in the Express framework.
 
 ### validation()
 
-Validate Bearer tokens.
+Validate Bearer tokens.  
+
+In case of validation error, the error response related to authentication is returned in the WWW-Authenticate header.  
+
+|HTTP status|WWW-Authenticate response header|Descritpion|
+|-|-|-|
+|401 Unauthorized|Bearer realm="\<Your realm name\>", error="token_required"|If there is no Authorization header for the request.|
+|401 Unauthorized|Bearer realm="\<Your realm name\>", error="invalid_token", error_description="Token format error"|If the Bearer token is empty or incorrect as token68 format.|
+|401 Unauthorized|Bearer realm="\<Your realm name\>", error="invalid_token", error_description="Token cannot be authenticated"|If the token is unregistered or invalid and cannot be authenticated.<br>This is the case when the return value of the optional tokenCheckCallback method is FALASE.|
+|400 Bad Request|Bearer realm="\<Your realm name\>", error="invalid_request"|In case of request body validation error.<br>This is the case when the return value of the optional requestParameterCheck method is FALASE.|
 
 ###### Syntax
 ```js

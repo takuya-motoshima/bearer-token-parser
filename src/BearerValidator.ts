@@ -70,7 +70,8 @@ export default class {
       // Returns a 401 error if the request does not include an Authorization header.
       if (!req.headers.authorization)
           return void res
-            .header('WWW-Authenticate', 'Bearer realm="token_required"')
+            .header('WWW-Authenticate', `Bearer realm="${options.realm}", error="token_required"`)
+            // .header('WWW-Authenticate', 'Bearer realm="token_required"')
             .sendStatus(401);
 
       // Get bearer token.

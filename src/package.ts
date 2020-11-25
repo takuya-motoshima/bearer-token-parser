@@ -1,5 +1,5 @@
 export var name = "bearer-token-parser";
-export var version = "1.0.0";
+export var version = "1.0.1";
 export var description = "This is a package that contains the Bearer token parsing and validation modules.";
 export var _moduleAliases = {"~":"."};
 export var main = "dist/build.common.js";
