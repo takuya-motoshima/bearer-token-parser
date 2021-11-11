@@ -1,12 +1,8 @@
 # bearer-token-parser
 
-This includes:  
-A generic Bearer token parsing module.  
-A module that validates Bearer tokens in the Express framework.
+This is a Bearer token authentication module that you can use with the Express framework.
 
 ## Installation
-
-Install.
 
 ```sh
 npm install bearer-token-parser;
@@ -19,22 +15,84 @@ See [API.md](./API.md) for API reference.
 
 See [CHANGELOG.md](./CHANGELOG.md).
 
-## Examples
+## Example
 
-There are some examples in "./examples" in this package.Here is the first one to get you started.
+There is a sample app in "./example" to try token authentication.
 
-![example.png](https://raw.githubusercontent.com/takuya-motoshima/bearer-token-parser/main/screencap/example.png)
+Move to the example directory.
+```sh
+cd example;
+```
+
+Install dependent libraries.
+```sh
+npm install;
+```
+
+Start the app.
+```sh
+npm start;
+```
+
+You can send an authentication request with curl.
+```sh
+# Token is correct.
+# Output: HTTP/1.1 200 OK
+#         X-Powered-By: Express
+#         Content-Type: text/html; charset=utf-8
+#         Content-Length: 29
+#         ETag: W/"1d-KmUch1QspvK6Xrde08cn3CIfaHk"
+#         Date: Thu, 11 Nov 2021 09:01:11 GMT
+#         Connection: keep-alive
+#         Keep-Alive: timeout=5
+curl -I -H 'Authorization: Bearer eTRPXY8F~np0zbAzi2~KN' http://localhost:3000/auth;
+
+# Wrong token.
+# Output: HTTP/1.1 401 Unauthorized
+#         X-Powered-By: Express
+#         WWW-Authenticate: Bearer realm="Sample API", error="invalid_token", error_description="Token cannot be authenticated"
+#         Content-Type: text/plain; charset=utf-8
+#         Content-Length: 12
+#         ETag: W/"c-dAuDFQrdjS3hezqxDTNgW7AOlYk"
+#         Date: Thu, 11 Nov 2021 08:57:38 GMT
+#         Connection: keep-alive
+#         Keep-Alive: timeout=5
+curl -I -H 'Authorization: Bearer SSfLqq7dItHdqPyX+A9KCTxQu9p1bcVq4TCDz~m~' http://localhost:3000/auth;
+
+# Missing Authorization header.
+# Output: HTTP/1.1 401 Unauthorized
+#         X-Powered-By: Express
+#         WWW-Authenticate: Bearer realm="Sample API", error="token_required"
+#         Content-Type: text/plain; charset=utf-8
+#         Content-Length: 12
+#         ETag: W/"c-dAuDFQrdjS3hezqxDTNgW7AOlYk"
+#         Date: Thu, 11 Nov 2021 08:58:58 GMT
+#         Connection: keep-alive
+#         Keep-Alive: timeout=5
+curl -I http://localhost:3000/auth;
+
+# Authorization header but no Token.
+# Output: HTTP/1.1 401 Unauthorized
+#         X-Powered-By: Express
+#         WWW-Authenticate: Bearer realm="Sample API", error="invalid_token", error_description="Token format error"
+#         Content-Type: text/plain; charset=utf-8
+#         Content-Length: 12
+#         ETag: W/"c-dAuDFQrdjS3hezqxDTNgW7AOlYk"
+#         Date: Thu, 11 Nov 2021 09:00:09 GMT
+#         Connection: keep-alive
+#         Keep-Alive: timeout=5
+curl -I -H 'Authorization: Bearer ' http://localhost:3000/auth;
+```
 
 ## Usage
 
 ### Parse Bearer token.
 
-An example of an Express framework.  
-BearerParser can also be used with other frameworks.
+An example of an Express framework. BearerParser can also be used with other frameworks.
 
 ```js
 import express from 'express';
-import { BearerParser } from 'bearer-token-parser';
+import {BearerParser} from 'bearer-token-parser';
 
 const router = express.Router();
 router.post('/', async (req, res, next) => {
@@ -56,7 +114,6 @@ app.use('/', router)
 ```
 
 ### Parse Bearer token.
-
 This is an example of validation of Bearer tokens.  
 BearerValidator is a module dedicated to the Express framework.  
 
@@ -71,14 +128,14 @@ In case of verification error, the following response is automatically returned.
 
 ```js
 import express from 'express';
-import { body, validationResult } from 'express-validator';
-import { BearerParser, BearerValidator } from 'bearer-token-parser';
+import {body, validationResult} from 'express-validator';
+import {BearerParser, BearerValidator} from 'bearer-token-parser';
 
 const router = express.Router();
 router.post('/', [
   // Validate input data.
   body('email').isEmail(),
-  body('name').isLength({ min: 1, max: 20 }),
+  body('name').isLength({min: 1, max: 20}),
 
   // Validate Bearer tokens.
   BearerValidator.validation({
@@ -109,6 +166,14 @@ router.post('/', [
 // mount the router on the app
 app.use('/', router)
 ```
+
+## Author
+
+**Takuya Motoshima**
+
+* [github/takuya-motoshima](https://github.com/takuya-motoshima)
+* [twitter/TakuyaMotoshima](https://twitter.com/TakuyaMotoshima)
+* [facebook/takuya.motoshima.7](https://www.facebook.com/takuya.motoshima.7)
 
 ## License
 

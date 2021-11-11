@@ -1,7 +1,7 @@
 {
   "name": "bearer-token-parser",
   "version": "1.0.1",
-  "description": "This is a package that contains the Bearer token parsing and validation modules.",
+  "description": "This is a Bearer token authentication module that you can use with the Express framework.",
   "_moduleAliases": {
     "~": "."
   },
@@ -24,7 +24,12 @@
   "files": [
     "dist/*.js",
     "types/*.d.ts",
-    "package.json"
+    "package.json",
+    "package.json",
+    "example",
+    "README.md",
+    "CHANGELOG.md",
+    "API.md"
   ],
   "keywords": [
     "node",

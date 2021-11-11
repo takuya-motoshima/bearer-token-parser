@@ -1,19 +1,19 @@
 import BearerParser from '~/BearerParser';
-import { Request, Response, NextFunction } from "express";
+import {Request, Response, NextFunction} from "express";
 
 /**
  * This is middleware that validates Bearer token authentication with the Express framework.
  *
  * @example
  * import express from 'express';
- * import { body, validationResult } from 'express-validator';
- * import { BearerParser, BearerTokenValidator } from 'bearer-token-parser';
+ * import {body, validationResult} from 'express-validator';
+ * import {BearerParser, BearerTokenValidator} from 'bearer-token-parser';
  * 
  * const router = express.Router();
  * router.post('/', [
  *   // Validate input data.
  *   body('email').isEmail(),
- *   body('name').isLength({ min: 1, max: 20 }),
+ *   body('name').isLength({min: 1, max: 20}),
  * 
  *   // Validate Bearer tokens.
  *   BearerTokenValidator.validation({
@@ -49,28 +49,28 @@ export default class {
   /**
    * Returns a middleware function that checks the bearer token.
    * 
-   * @param  {Object} options
+   * @param  {Object} opts
    * @return {Function}
    */
-  public static validation(options: {
+  public static validation(opts: {
     realm?: string,
     tokenCheckCallback?: undefined|Function,
     requestParameterCheck?: undefined|Function
   }): Function {
 
     // Initialize options.
-    options = Object.assign({
+    opts = Object.assign({
       realm: '',
       tokenCheckCallback: undefined,
       requestParameterCheck: undefined
-    }, options||{});
+    }, opts || {});
 
     // Returns a middleware function that checks the bearer token.
     return async (req: Request, res: Response, next: NextFunction) => {
       // Returns a 401 error if the request does not include an Authorization header.
       if (!req.headers.authorization)
           return void res
-            .header('WWW-Authenticate', `Bearer realm="${options.realm}", error="token_required"`)
+            .header('WWW-Authenticate', `Bearer realm="${opts.realm}", error="token_required"`)
             // .header('WWW-Authenticate', 'Bearer realm="token_required"')
             .sendStatus(401);
 
@@ -80,28 +80,28 @@ export default class {
       // Returns a 401 error if the token in the Authorization header is empty or malformatted.
       if (!token)
           return void res
-            .header('WWW-Authenticate', `Bearer realm="${options.realm}", error="invalid_token", error_description="Token format error"`)
+            .header('WWW-Authenticate', `Bearer realm="${opts.realm}", error="invalid_token", error_description="Token format error"`)
             .sendStatus(401);
 
       // Check if the token is correct.
-      if (options.tokenCheckCallback) {
-        const isValid = this.isAsyncFunction(options.tokenCheckCallback)
-          ? await options.tokenCheckCallback(token)
-          : options.tokenCheckCallback(token);
-        if (!isValid)
+      if (opts.tokenCheckCallback) {
+        const valid = this.isAsyncFunction(opts.tokenCheckCallback)
+          ? await opts.tokenCheckCallback(token)
+          : opts.tokenCheckCallback(token);
+        if (!valid)
             return void res
-              .header('WWW-Authenticate', `Bearer realm="${options.realm}", error="invalid_token", error_description="Token cannot be authenticated"`)
+              .header('WWW-Authenticate', `Bearer realm="${opts.realm}", error="invalid_token", error_description="Token cannot be authenticated"`)
               .sendStatus(401);
       }
 
       // Check request data.
-      if (options.requestParameterCheck) {
-        const isValid = this.isAsyncFunction(options.requestParameterCheck)
-          ? await options.requestParameterCheck(req)
-          : options.requestParameterCheck(req);
-        if (!isValid)
+      if (opts.requestParameterCheck) {
+        const valid = this.isAsyncFunction(opts.requestParameterCheck)
+          ? await opts.requestParameterCheck(req)
+          : opts.requestParameterCheck(req);
+        if (!valid)
           return void res
-            .header('WWW-Authenticate', `Bearer realm="${options.realm}", error="invalid_request"`)
+            .header('WWW-Authenticate', `Bearer realm="${opts.realm}", error="invalid_request"`)
             .sendStatus(400);
       }
 

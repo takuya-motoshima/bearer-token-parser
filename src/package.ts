@@ -1,13 +1,13 @@
 export var name = "bearer-token-parser";
 export var version = "1.0.1";
-export var description = "This is a package that contains the Bearer token parsing and validation modules.";
+export var description = "This is a Bearer token authentication module that you can use with the Express framework.";
 export var _moduleAliases = {"~":"."};
 export var main = "dist/build.common.js";
 export var module = "dist/build.esm.js";
 export var types = "types/index.d.ts";
 export var scripts = {"watch":"rollup -c --watch","prewatch":"rm -rf dist types && json2module package.json > src/package.ts","build":"rollup -c","prebuild":"rm -rf dist types && json2module package.json > src/package.ts","test":"jest","start":"ts-node -r tsconfig-paths/register -P tsconfig.json -O '{\"module\":\"commonjs\"}' -e \"import * as index from '~/index';console.log(index);\"","prestart":"json2module package.json > src/package.ts"};
 export var repository = {"type":"git","url":"git+https://github.com/takuya-motoshima/bearer-token-parser.git"};
-export var files = ["dist/*.js","types/*.d.ts","package.json"];
+export var files = ["dist/*.js","types/*.d.ts","package.json","package.json","example","README.md","CHANGELOG.md","API.md"];
 export var keywords = ["node","nodejs","javascript","js","shared","library","lib","module","typescript","ts","esm","es6","bearer"];
 export var author = "Takuya Motoshima <developer.takuyamotoshima@gmail.com> (https://twitter.com/TakuyaMotoshima)";
 export var license = "MIT";

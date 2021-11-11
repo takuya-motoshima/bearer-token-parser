@@ -1,0 +1,20 @@
+{
+  "name": "myapp",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node ./bin/www",
+    "//start": "pm2 start ecosystem.config.js",
+    "//restart": "pm2 restart ecosystem.config.js",
+    "//stop": "pm2 stop ecosystem.config.js"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.888.0",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-sweet": "~1",
+    "http-errors": "~1.6.3",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "sequelize": "^5.22.4"
+  }
+}

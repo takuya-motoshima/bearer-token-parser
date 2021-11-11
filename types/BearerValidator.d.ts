@@ -3,14 +3,14 @@
  *
  * @example
  * import express from 'express';
- * import { body, validationResult } from 'express-validator';
- * import { BearerParser, BearerTokenValidator } from 'bearer-token-parser';
+ * import {body, validationResult} from 'express-validator';
+ * import {BearerParser, BearerTokenValidator} from 'bearer-token-parser';
  *
  * const router = express.Router();
  * router.post('/', [
  *   // Validate input data.
  *   body('email').isEmail(),
- *   body('name').isLength({ min: 1, max: 20 }),
+ *   body('name').isLength({min: 1, max: 20}),
  *
  *   // Validate Bearer tokens.
  *   BearerTokenValidator.validation({
@@ -45,10 +45,10 @@ export default class {
     /**
      * Returns a middleware function that checks the bearer token.
      *
-     * @param  {Object} options
+     * @param  {Object} opts
      * @return {Function}
      */
-    static validation(options: {
+    static validation(opts: {
         realm?: string;
         tokenCheckCallback?: undefined | Function;
         requestParameterCheck?: undefined | Function;

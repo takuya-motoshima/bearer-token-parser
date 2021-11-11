@@ -10,11 +10,11 @@ Returns Bearer token from request header.
 
 ###### Syntax
 ```js
-BearerParser.parseBearerToken(headers: { authorization? : string }): string|undefined
+BearerParser.parseBearerToken(headers: {authorization? : string}): string|undefined
 ```
 
 ###### Parameters
-- __headers__: { authorization? : string }  
+- __headers__: {authorization? : string}  
     Request header object.
 
 ###### Returns

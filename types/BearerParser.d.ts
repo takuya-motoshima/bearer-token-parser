@@ -2,7 +2,7 @@
  * Bearer token parser.
  */
 export default class BearerParser {
-    private static REGEX_BEARER_TOKEN;
+    private static REG_TOKEN;
     /**
      * Returns Bearer token from request header.
      *
