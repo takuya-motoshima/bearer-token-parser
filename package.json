@@ -1,6 +1,6 @@
 {
   "name": "bearer-token-parser",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "This is a Bearer token authentication module that you can use with the Express framework.",
   "_moduleAliases": {
     "~": "."
@@ -9,27 +9,24 @@
   "module": "dist/build.esm.js",
   "types": "types/index.d.ts",
   "scripts": {
-    "watch": "rollup -c --watch",
-    "prewatch": "rm -rf dist types && json2module package.json > src/package.ts",
+    "prebuild": "rm -rf dist types",
     "build": "rollup -c",
-    "prebuild": "rm -rf dist types && json2module package.json > src/package.ts",
-    "test": "jest",
-    "start": "ts-node -r tsconfig-paths/register -P tsconfig.json -O '{\"module\":\"commonjs\"}' -e \"import * as index from '~/index';console.log(index);\"",
-    "prestart": "json2module package.json > src/package.ts"
+    "prewatch": "rm -rf dist types",
+    "watch": "rollup -c --watch",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/takuya-motoshima/bearer-token-parser.git"
   },
   "files": [
+    "API.md",
+    "CHANGELOG.md",
+    "README.md",
     "dist/*.js",
     "types/*.d.ts",
     "package.json",
-    "package.json",
-    "example",
-    "README.md",
-    "CHANGELOG.md",
-    "API.md"
+    "example"
   ],
   "keywords": [
     "node",
@@ -54,27 +51,24 @@
   },
   "homepage": "https://github.com/takuya-motoshima/bearer-token-parser#readme",
   "dependencies": {
-    "bowser": "^2.10.0",
     "express": "^4.17.1",
     "module-alias": "^2.2.2"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^23.0.7",
+    "@rollup/plugin-json": "^5.0.2",
+    "@rollup/plugin-node-resolve": "^15.2.1",
+    "@rollup/plugin-terser": "^0.2.1",
     "@types/express": "^4.17.9",
-    "@types/jest": "^26.0.3",
+    "@types/jest": "^29.2.4",
     "@types/node": "^14.0.22",
     "builtin-modules": "^3.1.0",
-    "jest": "^26.1.0",
-    "json2module": "0.0.3",
-    "rollup": "^2.21.0",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-json": "^4.0.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-terser": "^6.1.0",
-    "rollup-plugin-typescript2": "^0.27.1",
-    "ts-loader": "^7.0.5",
+    "jest": "^29.3.1",
+    "rollup": "^2.79.1",
+    "rollup-plugin-typescript2": "^0.35.0",
+    "sinon": "^17.0.1",
+    "ts-loader": "^9.4.2",
     "ts-node": "^8.10.2",
-    "tsconfig-paths": "^3.9.0",
-    "tslint": "^6.1.2",
-    "typescript": "^3.9.5"
+    "typescript": "^5.4.2"
   }
 }
