@@ -1,6 +1,6 @@
 {
   "name": "bearer-token-parser",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "This is a Bearer token authentication module that you can use with the Express framework.",
   "_moduleAliases": {
     "~": "."
